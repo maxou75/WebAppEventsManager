@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #fff;
+        }
+     </style>
+    <meta charset="UTF-8">
+    <title>Recherche d'evenement</title>
+    {% load staticfiles %}
+    <script src="{% static "assets/js/jquery.min.js" %}"></script>
+    <script src="{% static "assets/js/event-search.js" %}"></script>
+    <script src="{% static "assets/js/facebookAPI.js" %}"></script>
+    <script type="text/javascript">
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '367056473418282',
+                cookie     : false,  // enable cookies to allow the server to access
+                                // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.7' // use graph api version 2.7
+                });
+            FB.getLoginStatus(function(response) {
+             if (response.status === 'connected'){
+                    connectFbUser();
+                }
+          });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</head>
+<body>
+<li><a href="/">Retour à l'accueil</a></li>
+<h1> Recherche un evenement par son nom</h1>
+    <br \>
+
+    <div id="FBDiv">
+        <fb:login-button id="loginFB-button" scope="public_profile,email" onlogin="checkLoginState()">
+        </fb:login-button>
+        <div id="FacebookUser"></div>
+        <img id="FBprofilImage">
+        <div id="status"> </div>
+    </div>
+    <br \>
+
+    <br \>
+	<form id="search-event-form">{% csrf_token %}
+        <p>
+            <input type='text' id='inputID' value='{{value}}' />
+		</p>
+		<p>
+			<input id="searchEventButton" value="Rechercher" type="submit" />
+		</p>
+	</form>
+    <div style="height: 30px; width: 800px; background: #e4e4e4" id="msg"></div>
+    <br />
+	<div id="table" style="height: 150px; overflow-y: scroll;"></div>
+    </body>
+</body>
+</html>

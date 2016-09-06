@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Show list of user</title>
+    <style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 5px;
+	text-align: left;
+}
+
+table tr:nth-child(even) {
+	background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+	background-color: #fff;
+}
+</style>
+</head>
+<body>
+    <li><a href="/">Retour à l'accueil</a></li>
+	<h1>Liste des evenements en base</h1>
+	<div id="table" style="height: 300px; overflow-y: scroll;"></div>
+    {% load staticfiles %}
+    <script src="{% static "assets/js/jquery.min.js" %}"></script>
+    <script src="{% static "assets/js/event-list.js" %}"></script>
+
+</body>
+</html>
