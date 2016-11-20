@@ -6,10 +6,21 @@ $(document).ready(function(){
 
     getAllTypes($("#type"));
 
-    showEventsCreated = function() {
-        $("#facebookEvent").show();
+    checkConnexion = function() {
+        $.getScript('/static/assets/js/facebookAPI.js', function() {
+            FB.getLoginStatus(function(response) {
+                if (response.status==="connected")
+                    displayFbEvents();
+                else
+                    $('#msg').text("Veuillez d'abord vous connectez");
+            });
+        })
+    }
+
+    displayFbEvents = function() {
         var url = 'me?fields=events{owner,name,start_time,end_time,place,description}';
         FB.api(url, function(response) {
+            $("#facebookEvent").show();
             console.log("display FB events for current user.");
             var userId = response.id;
             var n = 0;
@@ -58,7 +69,7 @@ $(document).ready(function(){
                                 var typeSelected = $("#select-type-"+i).val();
                                 //importEvent(fbId, typeSelected);
                                 addEvent(item.name, item.id, item.start_time, item.description, item.place.name, item.place.location.city, item.place.location.country, item.owner.id, typeSelected);
-                                showEventsCreated();
+                                displayFbEvents();
                             });
                             td5.append(importButton);
                         }
@@ -76,7 +87,6 @@ $(document).ready(function(){
             $("#table").append(table);
         });
     }
-
 
     function getAllTypes(select){
         $.ajax({

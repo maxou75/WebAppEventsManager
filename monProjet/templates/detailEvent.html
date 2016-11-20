@@ -1,88 +1,34 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Voir un evenement</title>
-    {% load staticfiles %}
-    <script src="{% static "assets/js/jquery.min.js" %}"></script>
-    <script src="{% static "assets/js/index.js" %}"></script>
-    <script src="{% static "assets/js/facebookAPI.js" %}"></script>
-    <script src="{% static "assets/js/event-detail.js" %}"></script>
-    <script type="text/javascript">
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '367056473418282',
-                cookie     : false,  // enable cookies to allow the server to access
-                                // the session
-                xfbml      : true,  // parse social plugins on this page
-                version    : 'v2.7' // use graph api version 2.7
-                });
-            FB.getLoginStatus(function(response) {
-             if (response.status === 'connected'){
-                    connectFbUser();
-                    showEventsCreated(response);
-                }
-          });
-        };
-        // Load the SDK asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-</head>
-<body>
-    <div id="FBDiv">
-        <fb:login-button id="loginFB-button" scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-        <div id="FacebookUser"></div>
-        <img id="FBprofilImage">
-        <div id="status"></div>
-    </div>
-    <br \>
-    <li><a href="/">Retour à l'accueil</a></li>
-    <li><a href ="/createEvent">Creer un evenement</a></li>
-    <br \>
-    <h2> Rechercher un evenement </h2>
-    <br \>
-	<form id="search-event-form">{% csrf_token %}
-		<p>
-            <input type='text' id='inputID'>
-		</p>
-		<p>
-			<input id="searchEventButton" value="Rechercher" type="submit" />
-		</p>
-	</form>
+
+{% extends "index.html" %}
+
+{% block content %}
+
     <br/>
-    <br/>
-    <div id='eventDetail' eventId='{{eventId}}' >
-        <p>
-            <h1><u> <div id="name"></div>  </u></h1>
-        </p>
-        <p>
-            <label><b><u>Début : </u></b> </label>          <div id="startDateTime"></div>
-        </p>
-        <p>
-            <label><b><u>Type : </u></b></label>            <div id="type"></div>
-        </p>
-        <p>
-            <label><b><u>Description : </u></b></label>     <div id="description"></div>
-        </p>
-        <p>
-            <label><b><u>Lieu : </u></b></label>            <div id="location"></div>
-        </p>
-        <p>
-            <label><b><u>Ville : </u></b></label>           <div id="city"></div>
-        </p>
-        <p>
-            <label><b><u>Pays : </u></b></label>            <div id="country"></div>
-        </p>
-        <p>
-            <label><b><u>Créateur : </u></b></label>        <div id="owner"></div>
-        </p>
+        <div id='eventDetail' eventId='{{eventId}}' >
+            <p>
+                <h1><u> <div id="name"></div>  </u></h1>
+            </p>
+            <p>
+                <label><b><u>Début : </u></b> </label>          <div id="startDateTime"></div>
+            </p>
+            <p>
+                <label><b><u>Type : </u></b></label>            <div id="type"></div>
+            </p>
+            <p>
+                <label><b><u>Description : </u></b></label>     <div id="description"></div>
+            </p>
+            <p>
+                <label><b><u>Lieu : </u></b></label>            <div id="location"></div>
+            </p>
+            <p>
+                <label><b><u>Ville : </u></b></label>           <div id="city"></div>
+            </p>
+            <p>
+                <label><b><u>Pays : </u></b></label>            <div id="country"></div>
+            </p>
+            <p>
+                <label><b><u>Créateur : </u></b></label>        <div id="owner"></div>
+            </p>
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}

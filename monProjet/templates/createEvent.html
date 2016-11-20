@@ -1,117 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Creer un evenemnt</title>
-       <style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
+{% extends "index.html" %}
 
-th, td {
-	padding: 5px;
-	text-align: left;
-}
+{% block content %}
 
-table tr:nth-child(even) {
-	background-color: #eee;
-}
 
-table tr:nth-child(odd) {
-	background-color: #fff;
-}
-</style>
-    {% load staticfiles %}
-	<script type="text/javascript" src="{% static "assets/js/jquery.min.js" %}"></script>
-	<script type="text/javascript" src="{% static "assets/js/facebookAPI.js" %}"></script>
-    <script type="text/javascript" src="{% static "assets/js/event-manager.js" %}"></script>
-    <script type="text/javascript" src="{% static "assets/js/index.js" %}"></script>
-    <script type="text/javascript">
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '367056473418282',
-                cookie     : false,  // enable cookies to allow the server to access
-                                // the session
-                xfbml      : true,  // parse social plugins on this page
-                version    : 'v2.7' // use graph api version 2.7
-                });
-            FB.getLoginStatus(function(response) {
-                    connectFbUser(response, null);
-                if (response.status === 'connected'){
-                    showEventsCreated();
-                }
-            });
-        };
-        // Load the SDK asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-</head>
-<body>
-<li><a href="/">Retour à l'accueil</a></li>
+    <br/>
+    <div style="height: 30px; width: 800px; background: #e4e4e4" id="msg"></div>
+    <br/>
+    <button id="importFbEventButton" onclick="checkConnexion()">Importer un événement de Facebook </button>
 
-<h1> Creer un evenement</h1>
-<div id="FBDiv">
-    <fb:login-button id="loginFB-button" scope="public_profile,email" onlogin="checkLoginState();">
-    </fb:login-button>
-    <div id="FacebookUser"></div>
-    <img id="FBprofilImage">
-    <div id="status"></div>
-</div>
-<br/>
-<h2> Rechercher un evenement </h2>
-    <br \>
-	<form id="search-event-form">{% csrf_token %}
-		<p>
-            <input type='text' id='inputID'>
-		</p>
-		<p>
-			<input id="searchEventButton" value="Rechercher" type="submit" />
-		</p>
-	</form>
-<br/>
-<div style="height: 30px; width: 800px; background: #e4e4e4" id="msg"></div>
-<div id="facebookEvent" style="display: none;">
-    <h2>Importer un evenement de Facebook</h2>
-	<div id="table" style="height: 150px; overflow-y: scroll;"></div>
-</div>
-<h2>Creer un evenement</h2>
+    <div id="facebookEvent" style="display: none;">
+        <h2>Importer un evenement de Facebook</h2>
+        <div id="table" style="height: 150px; overflow-y: scroll;"></div>
+    </div>
+    <h2>Creer un evenement</h2>
 
-	<form id="create-event-form" >
-		<p>
-			<label>Nom</label> <input id="name" type="text"
-				name="name" />
-		</p>
-		<p>
-			<label>Description</label> <textarea cols="40" rows="5" id="description" name="description"></textarea>
-		</p>
-        <p>
-            <label>Catégorie</label> <select id="type" name="type"></select>
-        </p>
-        <p>
-			<label>Début</label> <input id="startDate" type="date" name="startDate" />
-            <input id="startTime" type="time" name="startTime" />
-		</p>
-        <p>
-			<label>Lieu</label> <input id="location" type="text" name="location" />
-		</p>
-        <p>
-			<label>Ville</label> <input id="city" type="text" name="city" />
-		</p>
-        <p>
-			<label>Pays</label> <input id="country" type="text" name="country" />
-		</p>
+        <form id="create-event-form" >
+            <p>
+                <label>Nom</label> <input id="name" type="text"
+                    name="name" />
+            </p>
+            <p>
+                <label>Description</label> <textarea cols="40" rows="5" id="description" name="description"></textarea>
+            </p>
+            <p>
+                <label>Catégorie</label> <select id="type" name="type"></select>
+            </p>
+            <p>
+                <label>Début</label> <input id="startDate" type="date" name="startDate" />
+                <input id="startTime" type="time" name="startTime" />
+            </p>
+            <p>
+                <label>Lieu</label> <input id="location" type="text" name="location" />
+            </p>
+            <p>
+                <label>Ville</label> <input id="city" type="text" name="city" />
+            </p>
+            <p>
+                <label>Pays</label> <input id="country" type="text" name="country" />
+            </p>
 
-		<p>
-			<input id="createEventButton" type="submit" />
-		</p>
-        {% csrf_token %}
-	</form>
-</body>
-</html>
+            <p>
+                <input id="createEventButton" type="submit" />
+            </p>
+            {% csrf_token %}
+        </form>
+{% endblock %}

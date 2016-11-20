@@ -6,7 +6,7 @@ class Type(Document):
 
 class Event(Document):
     name = StringField(max_length=20, required=True)
-    fbId = StringField(max_length=50)
+    fbId = StringField(max_length=50, null=True, blank=True, unique=True)
     startDateTime = StringField(max_length=50,required=True)
     createDateTime = DateTimeField
     type = ReferenceField(Type, required=True)

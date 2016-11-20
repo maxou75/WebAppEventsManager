@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from . import views
 
 import event.urls
 import user.urls
@@ -22,11 +23,13 @@ import user.urls
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="index.html")),
     url(r'^createEvent/$', TemplateView.as_view(template_name="createEvent.html")),
-    url(r'^listEvent/$', TemplateView.as_view(template_name="listEvent.html")),
+    url(r'^listEvent/$', TemplateView.as_view(template_name="test.html")),
     url(r'^search/(?P<value>[\w ]+)/$', TemplateView.as_view(template_name="searchNameEvent.html")),
+    url(r'^searchEvent/(?P<value>[\w ]+)/$', TemplateView.as_view(template_name="searchNameEvent2.html")),
     url(r'^search/$', TemplateView.as_view(template_name="searchNameEvent.html")),
     url(r'^event/(?P<eventId>[\w ]+)/$', TemplateView.as_view(template_name="detailEvent.html")),
-    url(r'^event/$', TemplateView.as_view(template_name="detailEvent.html")),
+    url(r'^detailEvent/$', TemplateView.as_view(template_name="detailEvent.html")),
+    url(r'^profile/(?P<userId>[\w ]+)/$', TemplateView.as_view(template_name="detailProfile.html")),
     url(r'^rest/event/', include(event.urls)),
     url(r'^rest/user/', include(user.urls))
 ]

@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Miniport by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
         <link rel="shortcut icon" href="">
@@ -26,12 +21,20 @@
         table tr:nth-child(odd) {
             background-color: #fff;
         }
+        content {
+            height:100%
+        }
         </style>
 		<meta charset="utf-8" />
         {% load staticfiles %}
         <script src="{% static "assets/js/jquery.min.js" %}"></script>
-        <script src="{% static "assets/js/index.js" %}"></script>
+        <script src="{% static "assets/js/event-search.js" %}"></script>
         <script src="{% static "assets/js/facebookAPI.js" %}"></script>
+        <script src="{% static "assets/js/event-detail.js" %}"></script>
+        <script src="{% static "assets/js/event-manager.js" %}"></script>
+        <script src="{% static "assets/js/index.js" %}"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYd9PaC_15BBiGZk80jQ4xaBvEzvxgDMU"></script>
+        <script src="{% static "assets/js/locationGoogleAPI.js" %}"></script>
         <script type="text/javascript">
         window.fbAsyncInit = function() {
             FB.init({
@@ -42,9 +45,7 @@
                 version    : 'v2.7' // use graph api version 2.7
                 });
             FB.getLoginStatus(function(response) {
-                if (response.status === 'connected'){
-                    connectFbUser(response);
-                }
+                statusChangeCallback(response);
             });
         };
         // Load the SDK asynchronously
@@ -72,10 +73,14 @@
         <div id="status"> </div>
     </div>
     <br \>
-    <A href ="/createEvent">Creer un evenement</A>
+    <button id="createEvent" onclick="window.location.href = '/createEvent'"}>Creer un evenement</button>
     <br \>
-    <A href ="/listEvent">Voir les evenements</A>
     <br \>
+    <!-- <A href ="/listEvent">Voir les evenements</A> -->
+     <button id="userLocation">Rechercher les événements pour </button>
+    <br \>
+    <p> Rechercher un événement par catégorie : </p>
+    <div id="types"></div>
     <br \>
     <h2> Rechercher un evenement </h2>
     <br \>
@@ -87,5 +92,16 @@
 			<input id="searchEventButton" value="Rechercher" type="submit" />
 		</p>
 	</form>
+    <!--
+    <div id='content'></div>
+    <button id="test" value="test" onclick="testFunction();"> Test</button>
+
+    -->
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
     </body>
 </html>

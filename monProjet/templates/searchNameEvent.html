@@ -36,9 +36,7 @@
                 version    : 'v2.7' // use graph api version 2.7
                 });
             FB.getLoginStatus(function(response) {
-             if (response.status === 'connected'){
-                    connectFbUser();
-                }
+                statusChangeCallback(response);
           });
         };
         // Load the SDK asynchronously
