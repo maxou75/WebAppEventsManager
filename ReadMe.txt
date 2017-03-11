@@ -4,4 +4,6 @@
 
 3) Installer MongoDB
 
-4) Dans un navigateur, aller sur http://localhost:8000/
+4) Récuperer le code du projet depuis GitLab
+
+5) Dans un navigateur, aller sur http://localhost:8000/
