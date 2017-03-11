@@ -4,7 +4,7 @@
 $(document).ready(function(){
 
 
-    getAllTypes($("#type"));
+    getAllTypes($("#typesListCreate"));
 
     checkConnexion = function() {
         $.getScript('/static/assets/js/facebookAPI.js', function() {
@@ -122,7 +122,7 @@ $(document).ready(function(){
         var countryInput = $("#country").val($("#country").val().trim()).val();
         var facebookUserId = $("#FacebookUser").attr("FbId");
         var facebookUserName = $("#FacebookUser").attr("FbName");
-        var type = $("#type").val();
+        var type = $("#typesListCreate").val();
         if (nameInput && startDateInput && startTimeInput && descriptionInput && locationInput && cityInput && countryInput) {
             var startDateTimeInput=startDateInput + "T" + startTimeInput + ":00";
             addEvent(nameInput, null, startDateTimeInput, descriptionInput, locationInput, cityInput, countryInput, facebookUserId, type);
@@ -187,8 +187,9 @@ $(document).ready(function(){
                     $("#city").val('');
                     $("#country").val('')
                 },
-                400: function (data, status, response) {
-                    $('#msg').text(data.responseJSON);
+                400: function (errors, status, response) {
+                    $('#msg').text(errors.responseText);
+                    console.log(JSON.stringify(errors));
                 }
             }
         });

@@ -1,12 +1,14 @@
 from collections import OrderedDict
 
 from django.test import TestCase
-from monApp.serializers import EventDeserializer
-from monApp.serializers import TypeSerializer
 
 from event.models import Type
 
 # python manage.py test
+from event.serializers import TypeSerializer, EventDeserializer
+
+# It was working before but now throw an ImproperlyConfigured Exception : Requested setting DEFAULT_INDEX_TABLESPACE
+# => TO FIX
 class monTest(TestCase):
     #type = {'name' : 'Battle'}
    # typeSerializer = TypeSerializer(data = type)

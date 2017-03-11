@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
-from . import views
 
 import event.urls
 import user.urls

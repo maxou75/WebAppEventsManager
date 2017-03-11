@@ -17,7 +17,10 @@ $(document).ready(function(){
                     $("#description").append(data.description);
                     $("#location").append(data.location);
                     $("#city").append(data.city);
-                    $("#type").append(data.type.name);
+                    var option = $("<option>");
+                    option.attr("value",data.type.id);
+                    option.append(data.type.name);
+                    $("#type").append(option);
                     $("#country").append(data.country);
                     $("#owner").append(data.ownerName);
                 }
