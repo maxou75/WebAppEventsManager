@@ -10,7 +10,7 @@ class Event(Document):
     # An event can be created without being imported from FB but if it is, its FB id must be unique
     fbId = StringField(max_length=50, null=True, blank=True, unique=True)
     startDateTime = StringField(max_length=50, required=True)
-    createDateTime = DateTimeField
+    createDateTime = DateTimeField(input_formats=['%Y-%m-%d %H:%M'])
     # The Event Type is a reference to a Type object from the Database
     type = ReferenceField(Type, required=True)
     description = StringField(max_length=5000, required=True)

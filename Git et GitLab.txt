@@ -10,6 +10,7 @@
 
 >git commit //Commits les fichiers add
 
->git push -u origin master //Envoie les fichiers au serveurs distant (GitLab UTC)
+>Jef
+ //Envoie les fichiers au serveurs distant (GitLab UTC)
 
 >git checkout <fichier> // revenir a l'ancien commit pour <fichier>
