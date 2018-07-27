@@ -34,7 +34,7 @@ This personal project was for me the opportunity to learn Python and Django fram
 
 Moreover, there are many features that are not finished or could be added : user location finding with Google API, user manager page, better events search, etc.
 
-Finally, I was mainly focus on the backend side and I it is why implemented a basic frontend logic and design.
+Finally, I was mainly focus on the backend side and it is why I implemented a basic frontend logic and design.
 
 ## Authors
 
