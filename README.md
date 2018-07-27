@@ -39,4 +39,4 @@ Finally, I was mainly focus on the backend side and it is why I implemented a ba
 ## Authors
 
 * **Maxime DONNET** - *Initial work* - [Web app Events Manager Sample](https://github.com/maxou75/web_events_manager_sample)
-* **February 2017**
+* **January 2017**
