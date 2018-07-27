@@ -7,7 +7,7 @@ from event.models import Event, Type
 class TypeSerializer(DocumentSerializer):
     class Meta:
         model = Type
-
+        fields = '__all__'
 
 # I couldn't manage for now to have a unique serializer that create an event with just the object id
 # for the type and return events with the entire type object => Serializer and Deserializer
@@ -17,6 +17,7 @@ class TypeSerializer(DocumentSerializer):
 class EventSerializer(DocumentSerializer):
     class Meta:
         model = Event
+        fields = '__all__'
         depth = 2
 
 
@@ -27,6 +28,7 @@ class EventDeserializer(DocumentSerializer):
     # type = TypeSerializer()
     class Meta:
         model = Event
+        fields = '__all__'
         depth = 2
 
 

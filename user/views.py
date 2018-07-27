@@ -6,7 +6,7 @@ from user.models import User
 from user.serializers import UserSerializer
 
 
-# TODO
+# TODO : add missing services
 
 @api_view(['POST'])
 def createUser(request):
@@ -36,6 +36,6 @@ def getUserById(request, id=None):
     try:
         event = User.objects.get(id=id)
     except User.DoesNotExist:
-        return Response(None, status=status.HTTP_200_OK)
+        return Response(None, status=status.HTTP_404_NOT_FOUND)
     serializer = UserSerializer(event)
     return Response(serializer.data, status=status.HTTP_200_OK)

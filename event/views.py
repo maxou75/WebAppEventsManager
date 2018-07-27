@@ -27,7 +27,7 @@ def createEvent(request):
     # else
     print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    """
+"""
 
 
 # Return all the Events objects which match with the name parameter
@@ -36,6 +36,7 @@ class findEventsByName(generics.ListAPIView):
 
     def get_queryset(self):
         name = self.kwargs['name']
+        print("findEventsByName : " + name)
         # Let's return any events that name or location contains the string parameter
         return Event.objects.filter(Q(name__icontains=name) | Q(location__icontains=name))
 

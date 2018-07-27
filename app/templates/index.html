@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<title>Gestionnaire d'événements</title>
+        <style>
+        h1 {
+            color: #FCA205;
+        }
+        body {
+            padding-left: 15px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        content {
+            height:100%
+        }
+        </style>
+		<meta charset="utf-8" />
+        {% load staticfiles %}
+        <script src="{% static "assets/js/jquery.min.js" %}"></script>
+        <script src="{% static "assets/js/event-search.js" %}"></script>
+        <script src="{% static "assets/js/facebookAPI.js" %}"></script>
+        <script src="{% static "assets/js/event-detail.js" %}"></script>
+        <script src="{% static "assets/js/event-manager.js" %}"></script>
+        <script src="{% static "assets/js/user-detail.js" %}"></script>
+        <script src="{% static "assets/js/index.js" %}"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYd9PaC_15BBiGZk80jQ4xaBvEzvxgDMU"></script>
+        <script src="{% static "assets/js/locationGoogleAPI.js" %}"></script>
+        <script type="text/javascript">
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '367056473418282', //Unique appID. A changer si créer nouveau projet sur le site développeur FB.
+                cookie     : false,  // enable cookies to allow the server to access
+                                // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.7' // use graph api version 2.7
+                });
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+            });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+	</head>
+	<body>
+    <h1> Gestion d'événements </h1>
+    <!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+    <div id="FBDiv">
+        <fb:login-button id="loginFB-button" scope="public_profile,email" onlogin="checkLoginState()">
+        </fb:login-button>
+        <div id="FacebookUser"></div>
+        <img id="FBprofilImage">
+        <div id="status"> </div>
+    </div>
+    <br \>
+    <button id="createEvent" onclick="window.location.href = '/createEvent'"}>Creer un evenement</button>
+    <br \>
+    <br \>
+    <!-- <A href ="/listEvent">Voir les evenements</A> -->
+     <button id="userLocation">Rechercher les événements pour </button>
+    <br \>
+    <p> Rechercher un événement par catégorie : </p>
+    <div id="typesSearch"></div>
+    <br \>
+    <h2> Rechercher un evenement </h2>
+    <br \>
+	<form id="search-event-form">{% csrf_token %}
+		<p>
+            <input type='text' id='inputID'>
+		</p>
+		<p>
+			<input id="searchEventButton" value="Rechercher" type="submit" />
+		</p>
+	</form>
+    <!--
+    <div id='content'></div>
+    <button id="test" value="test" onclick="testFunction();"> Test</button>
+
+    -->
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    </body>
+</html>
